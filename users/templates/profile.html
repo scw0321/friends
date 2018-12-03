@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quotes</title>
+     {% load static %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div class='container'>
+        <div class='row'>
+            <div id='dash' class='col-sm-1 col-sm-offset-9'>
+                <h5><a href='/show'>Home</a></h5>
+            </div>
+            <div class='col-sm-1'>
+                <h5><a href='/logout'>Logout</a></h5>
+            </div>
+        </div>
+        <h3>{{user.first_name}}'s Profile</h3>
+        <form action = "/{{user.id}}/post" method="POST">
+        {% csrf_token %}
+        <h4>First Name: {{user.first_name}}</h4>
+        <h4>Last Name: {{user.last_name}}</h4>
+        <h4>Email: {{user.email}}</h4>
+
+       {% for comment in comments %}
+        <tr>
+            <td>{{comment.comment}} {{comment.poster.first_name}} {{comment.created_at}}
+                <a href="/{{user.id}}/{{comment.id}}/delete_comment">Delete</a></td><br>
+        </tr>
+        {% endfor %}
+        <br>
+        <h4>Comment:</h4>
+        <textarea rows="10" cols="90" name="post" placeholder="Comment"></textarea>><br><br>
+        <input type="submit" name="submit" value="Post">
+        <!--<a href="{{user.id}}/edit">Edit</a>-->
+        </form>
+    </div>
+</body>
+</html>

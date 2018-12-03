@@ -1,0 +1,89 @@
+
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+    <div class='container'>
+        <h2>Welcome!</h2>
+        <div class='row'>
+            <div class='col-sm-5 forms'>
+
+                <h3>Register</h3>
+                <form class="form-horizontal" action='/register' method='post'>
+                    {% csrf_token %}
+                    <div class='form-group'>
+                        <label>First Name:</label>
+                        <input name='first_name' type='text' class='form-control'>
+                    </div>
+                    <div class='form-group'>
+                        <label>Last Name:</label>
+                        <input name='last_name' type='text' class='form-control'>
+                    </div>
+                    <div class='form-group'>
+                        <label>Date of Birth:</label>
+                        <input name='bday' type='date' class='form-control' placeholder='Birthday'>
+                    </div>
+                    <div class='form-group'>
+                        <label>Email Address:</label>
+                        <input name='email' type='email' class='form-control'>
+                    </div>
+                    <div class='form-group'>
+                        <label>Password:</label>
+                        <input name='pw' type='password' class='form-control'>
+                    </div>
+                    <h5>*Password should be at least 8 characters</h5>
+                    <div class='form-group'>
+                        <label>Confirm Password:</label>
+                        <input name='confirm_pw' type='password' class='form-control'>
+                    </div>
+
+                    <input class="btn btn-success pull-right" type="submit" value="Register">
+                </form>
+            </div>
+
+            <div class='col-sm-5 col-sm-offset-1 forms'>
+                <h3>Login</h3>
+                <form class="form-horizontal" action='/login' method='post'>
+                    {% csrf_token %}
+                    <div class='form-group'>
+                        <label>Email Address:</label>
+                        <input name='email' type='email' class='form-control'>
+                    </div>
+                    <div class='form-group'>
+                        <label>Password:</label>
+                        <input name='pw' type='password' class='form-control'>
+                    </div>
+                    <input class="btn btn-success pull-right" type="submit" value="Login">
+                </form>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-sm-6'>
+                <div id='errors'>
+                    <div>
+                        {% if messages %}
+                            {% for message in messages %}
+                                <pre>{{message}}</pre>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <!--{% for error in errors %}-->
+                        <!--<h4>{{error}}</h4>-->
+                    <!--{% endfor %}-->
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
